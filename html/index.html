@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>DFS, BFS, A* Visualizer</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/globals.js" defer></script>
+        <script src="../js/colors.js" defer></script>
+        <script src="../js/canvas.js" defer></script>
+        <script src="../js/algorithms.js" defer></script>
+        <script src="../js/handlers.js" defer></script>
+        <script src="../js/script.js" defer></script>
+    </head>
+    <body>
+
+        <header class="toolbar primary-container">
+            <span class="vertical-sep"></span>
+
+            <div class="tb-logo"><h3>Pathfinding Visualizer</h3></div>
+
+            <span class="vertical-sep"></span>
+
+            <div class="tb-selectors">
+                <label>
+                    <select class="secondary-container" id="alg-selector">
+                        <option value="dfs">Depth First Search</option>
+                        <option value="bfs">Breadth First Search</option>
+                        <option value="a-star">A* Algorithm</option>
+                    </select>
+                </label>
+
+                <span class="vertical-sep"></span>
+
+                <label class="tb-selectors" for="speed">Speed
+                    <span class="inv-sep"></span>
+                    <input type="range" id="speed" class="speed-bar" min="0" max="500" value="200" step="50">
+                </label>
+            </div>
+
+            <span class="vertical-sep"></span>
+
+            <div class="tb-elements secondary-container">
+                <button class="elem-button" value="wall" onclick="selectElem(event)">Wall</button>
+                <button class="elem-button" value="start" onclick="selectElem(event)">Start</button>
+                <button class="elem-button" value="end" onclick="selectElem(event)">End</button>
+                <button class="elem-button" value="empty" onclick="selectElem(event)">Eraser</button>
+            </div>
+
+            <span class="vertical-sep"></span>
+
+            <div class="tb-utilities">
+                <button class="secondary-container" onclick="randomMaze()">Random Maze</button>
+                <span class="inv-sep"></span>
+                <button class="secondary-container" onclick="clearPath()">Clear Path</button>
+                <span class="inv-sep"></span>
+                <button class="secondary-container" onclick="resetCanvas()">Reset</button>
+                <span class="inv-sep"></span>
+                <button class="secondary-container" onclick="runAlgorithm()">Run Algorithm</button>                   
+            </div>
+
+            <span class="vertical-sep"></span>
+        </header>
+
+        <aside class="info-container primary-container">
+            <span style="font-weight: bold">Legend</span>
+
+            <span class="horizontal-sep"></span>
+
+            <table class="legend-container">
+                <tr>
+                    <td><span class="dot" style="background-color: var(--accent-start)"></span>Start</td>
+                    <td><span class="dot" style="background-color: var(--accent-end)"></span>End</td>
+                </tr>
+                <tr>
+                    <td><span class="dot" style="background-color: var(--bg2)"></span>Wall</td>
+                    <td><span class="dot" style="background-color: var(--bg1)"></span>Frontier</td>
+                </tr>
+                <tr>
+                    <td><span class="dot" style="background-color: var(--accent-primary)"></span>Visited</td>
+                    <td><span class="dot" style="background-color: var(--accent-secondary)"></span>Path</td>
+                </tr>
+            </table>
+
+            <span class="horizontal-sep"></span>
+
+            <!-- to fix -->
+            <div class="log-container secondary-container" id="log">
+
+            </div>
+
+            <span class="horizontal-sep"></span>
+
+            <select class="secondary-container theme-container">
+                <option>Tema del porco dio</option>
+                <option>Tema della madonna morta</option>
+            </select>
+        </aside>
+
+        <main class="board-container" id="board-wrapper">
+            <canvas id="board-canvas"></canvas>
+        </main>
+    </body>
+</html>
