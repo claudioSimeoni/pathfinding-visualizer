@@ -42,15 +42,15 @@ class AuthContext{
         this.loggedIn = loggedIn; 
 
         if(loggedIn){
-            userDashboard.displayProfile(user); 
+            userDashboard.displayUserProfile(user); 
         }
     }
 
     async handleLogin(event){
         event.preventDefault(); 
 
-        usernameInput = document.getElementById("login-username"); 
-        usernamePassword = document.getElementById("login-password"); 
+        username = document.getElementById("login-username").value; 
+        password = document.getElementById("login-password").value; 
 
         const { user, token, loggedIn } = await apiContext.login(username, password); 
 
@@ -59,7 +59,7 @@ class AuthContext{
         this.loggedIn = loggedIn; 
 
         if(loggedIn){
-            userDashboard.displayProfile(user); 
+            userDashboard.displayUserProfile(user); 
         }
     }
 }

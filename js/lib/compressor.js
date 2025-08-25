@@ -1,0 +1,5 @@
+class Compressor{
+    getBuffer() {
+        return 
+    }    
+}

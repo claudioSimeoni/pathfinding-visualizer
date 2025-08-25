@@ -29,3 +29,7 @@ let canvasSleep = 1000;
 function sleep(sleepingTime){
     return new Promise(resolve => setTimeout(resolve, sleepingTime)); 
 }
+
+const userDashboard = new UserDashboard();
+const authContext = new AuthContext();
+const apiContext = new ApiContext();

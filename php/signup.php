@@ -1,8 +1,8 @@
 <?php
-require_once "dbaccess.php"; 
-session_start(); 
+require_once "dbaccess.php";
+session_start();
 
-$conn = mysqli_connect(DBHOST, DBNAME, DBUSER, DBPASS); 
+$conn = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME); 
 
 if($conn->connect_error){
     die("Connection failed" . $conn->connect_error); 
@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         echo json_encode([
             "status" => "error", 
             "message" => "There is already an account with this email!"
-        ]); 
+        ]);
         exit(); 
     }
 
@@ -42,11 +42,29 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     }
 
     $query = $conn->prepare("INSERT INTO users (username, email, password) VALUES(?, ?, ?)"); 
-    $query->bind_param("sss", $username, $email, $password); 
+    $query->bind_param("sss", $username, $email, $hashed_password); 
 
     if($query->execute()){
-        $user_id = $conn->insert_id; 
-        
+        $user_id = $query->insert_id; 
+        $boards = []; 
+
+        $token = bin2hex(random_bytes(32)); 
+        $_SESSION["user_id"] = $user_id; 
+        $_SESSION["token"] = $token; 
+
+        setcookie("session_token", $token, time() + 3600, "/", "", false, true); 
+
+        echo json_encode([
+            "status" => "success",
+            "message" => "User registered successfully!",
+            "user" => [
+                "user_id" => $user_id,
+                "username" => $username,
+                "email" => $email,
+                "boards" => $boards
+            ], 
+            "token" => $token
+        ]); 
     }
     else{
         echo json_encode([
@@ -54,9 +72,5 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             "message" => "Error: " . $query->error
         ]); 
     }
-
-    $query->close(); 
-}
-
-$conn->close(); 
-?>
+} // in longer scripts you should close connection query etc
+?> 
