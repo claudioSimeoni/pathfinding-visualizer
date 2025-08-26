@@ -88,6 +88,40 @@ async function clearPath() {
     drawCanvas();
 }
 
+async function randomMaze() {
+    stop = 1; 
+    await sleep(10); 
+    
+    let goodMaze = 0;
+    // let count = 0; 
+
+    while (!goodMaze) {
+        clearVisited();
+        // count++; 
+
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                if (grid[i][j] == "start" || grid[i][j] == "end") continue;
+                if (Math.random() < 0.30) grid[i][j] = "wall";
+                else grid[i][j] = "empty";
+            }
+        }
+
+        if(start === null){
+            break;
+        }
+
+        stop = 0;
+        syncDFS(start[0], start[1]);
+        if (stop) goodMaze = 1;
+    }
+
+    // console.log(count);  
+
+    clearVisited();
+    drawCanvas();
+}
+
 function resetStartEnd() {
     grid[0][0] = "start";
     grid[rows - 1][cols - 1] = "end";

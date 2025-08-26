@@ -1,202 +1,188 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>DFS, BFS, A* Visualizer</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <script src="../js/lib/compressor.js" defer></script>
-        <script src="../js/lib/algorithms.js" defer></script>
-        <script src="../js/lib/canvas.js" defer></script>
-        <script src="../js/lib/colors.js" defer></script>
-        <script src="../js/lib/handlers.js" defer></script>
-        <script src="../js/lib/init.js" defer></script>        
-        <script src="../js/context/userDashboard.js" defer></script>
-        <script src="../js/context/authContext.js" defer></script>
-        <script src="../js/context/apiContext.js" defer></script>
-        <script src="../js/board.js" defer></script>
-        <script src="../js/globals.js" defer></script>
-    </head>
-    <body>
-        <!-- toolbar -->
-        <header class="primary-container" id="toolbar">
-            <div class="vertical-sep"></div>
 
-            <div class="tb-logo button"><h3>Pathfinding Visualizer</h3></div>
+<head>
+    <title>DFS, BFS, A* Visualizer</title>
 
-            <div class="vertical-sep"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <div class="tb-selectors">
-                <div class="button">
-                    <select class="secondary-container big-box" id="alg-selector">
-                        <option value="dfs">Depth First Search</option>
-                        <option value="bfs">Breadth First Search</option>
-                        <option value="a-star">A* Algorithm</option>
-                    </select>
-                </div>
+    <link rel="icon" href="../227-2275594_tiny-maze-puzzle-icons-png-small-maze-puzzle.jpeg">
 
-                <div class="vertical-sep"></div>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/lib/compressor.js" defer></script>
+    <script src="../js/lib/algorithms.js" defer></script>
+    <script src="../js/lib/canvas.js" defer></script>
+    <script src="../js/lib/colors.js" defer></script>
+    <script src="../js/lib/handlers.js" defer></script>
+    <script src="../js/lib/init.js" defer></script>
+    <script src="../js/context/userDashboard.js" defer></script>
+    <script src="../js/context/authContext.js" defer></script>
+    <script src="../js/context/apiContext.js" defer></script>
+    <script src="../js/board.js" defer></script>
+    <script src="../js/globals.js" defer></script>
+</head>
 
-                <label class="tb-selectors" for="speed">Speed
-                    <div class="invisible-sep"></div>
-                    <input type="range" id="speed" class="speed-bar" min="0" max="500" value="200" step="50">
-                </label>
+<body>
+    <!-- toolbar -->
+    <header class="primary-container" id="toolbar">
+        <div class="vertical-sep"></div>
+
+        <div class="tb-logo button">
+            <h3>Pathfinding Visualizer</h3>
+        </div>
+
+        <div class="vertical-sep"></div>
+
+        <div class="tb-selectors">
+            <div class="button">
+                <select class="secondary-container big-box" id="alg-selector">
+                    <option value="dfs">Depth First Search</option>
+                    <option value="bfs">Breadth First Search</option>
+                    <option value="a-star">A* Algorithm</option>
+                </select>
             </div>
 
             <div class="vertical-sep"></div>
 
-            <div class="tb-elements">
-                <button class="elem-button button" value="wall" onclick="selectElem(event)">Wall</button>
-                <button class="elem-button button" value="start" onclick="selectElem(event)">Start</button>
-                <button class="elem-button button" value="end" onclick="selectElem(event)">End</button>
-                <button class="elem-button button" value="empty" onclick="selectElem(event)">Eraser</button>
-            </div>
-
-            <div class="vertical-sep"></div>
-
-            <div class="tb-utilities">
-                <button class="secondary-container big-box button" onclick="randomMaze()">Random Maze</button>
+            <label class="tb-selectors" for="speed">Speed
                 <div class="invisible-sep"></div>
-                <button class="secondary-container big-box button" onclick="clearPath()">Clear Path</button>
-                <div class="invisible-sep"></div>
-                <button class="secondary-container big-box button" onclick="resetCanvas()">Reset</button>
-                <div class="invisible-sep"></div>
-                <button class="secondary-container big-box button" id="run-algorithm" onclick="runAlgorithm()">Run Algorithm</button>                   
+                <input type="range" id="speed" class="speed-bar" min="0" max="500" value="200" step="50">
+            </label>
+        </div>
+
+        <div class="vertical-sep"></div>
+
+        <div class="tb-elements">
+            <button class="elem-button button" value="wall" onclick="selectElem(event)">Wall</button>
+            <button class="elem-button button" value="start" onclick="selectElem(event)">Start</button>
+            <button class="elem-button button" value="end" onclick="selectElem(event)">End</button>
+            <button class="elem-button button" value="empty" onclick="selectElem(event)">Eraser</button>
+        </div>
+
+        <div class="vertical-sep"></div>
+
+        <div class="tb-utilities">
+            <button class="secondary-container big-box button" onclick="randomMaze()">Random Maze</button>
+            <div class="invisible-sep"></div>
+            <button class="secondary-container big-box button" onclick="clearPath()">Clear Path</button>
+            <div class="invisible-sep"></div>
+            <button class="secondary-container big-box button" onclick="resetCanvas()">Reset</button>
+            <div class="invisible-sep"></div>
+            <button class="secondary-container big-box button" id="run-algorithm" onclick="runAlgorithm()">Run
+                Algorithm</button>
+        </div>
+
+        <div class="vertical-sep"></div>
+
+        <!-- theme -->
+        <select class="secondary-container big-box button" id="theme-selector">
+            <option value="night">Night theme</option>
+            <option value="day">Sunset theme</option>
+        </select>
+    </header>
+
+    <!-- aside control bar -->
+    <aside class="info-container primary-container">
+        <div style="font-weight: bold">Legend</div>
+
+        <div class="horizontal-sep"></div>
+
+        <!-- legend -->
+        <div class="legend-grid">
+            <div class="dot" style="background-color: var(--accent-start)"></div>
+            <div>Start</div>
+            <div class="dot" style="background-color: var(--accent-end)"></div>
+            <div>End</div>
+
+            <div class="dot" style="background-color: var(--bg2)"></div>
+            <div>Wall</div>
+            <div class="dot" style="background-color: var(--bg1)"></div>
+            <div>Frontier</div>
+
+            <div class="dot" style="background-color: var(--accent-primary)"></div>
+            <div>Visited</div>
+            <div class="dot" style="background-color: var(--accent-secondary)"></div>
+            <div>Path</div>
+        </div>
+
+        <div class="horizontal-sep"></div>
+
+        <!-- log -->
+        <div class="log-container secondary-container" id="log"></div>
+
+        <div class="horizontal-sep"></div>
+
+
+        <!-- login / signup -->
+        <div class="user-dashboard" id="user-dashboard">
+            <div id="signup-form" class="registration-form">
+                <div style="font-weight: bold">Register</div> <!-- TODO: make this a b??-->
+                <div class="horizontal-sep"></div>
+
+                <form onsubmit="authContext.handleSignup(event)" class="form-grid">
+                    <label for="signup-username">Username</label>
+                    <input class="secondary-container mid-box" type="text" id="signup-username" name="username"
+                        pattern="^[A-Za-z0-9!#$%&*^_-~]{3,30}$" required>
+
+                    <label for="signup-email">Email</label>
+                    <input class="secondary-container mid-box" type="email" id="signup-email" name="email"
+                        pattern="^[^@]+@[^@]+\.[^@]+$" required>
+
+                    <label for="signup-password">Password</label>
+                    <input class="secondary-container mid-box" type="password" id="signup-password" name="password"
+                        pattern="^[A-Za-z0-9!#$%&*^_-~]{6,30}$" required>
+
+                    <div class="form-actions form-grid">
+                        <button type="submit" class="secondary-container mid-box button">Sign Up</button>
+                        <p style="font-size:0.7rem">Already registered: <a href="#"
+                                onclick="userDashboard.showLoginForm()">Log In</a>
+                        </p>
+                    </div>
+                </form>
             </div>
 
-            <div class="vertical-sep"></div>
+            <div id="login-form" class="registration-form hidden">
+                <div style="font-weight: bold">Login</div>
+                <div class="horizontal-sep"></div>
 
-            <!-- theme -->
-            <select class="secondary-container big-box button" id="theme-selector">
-                <option value="night">Night theme</option>
-                <option value="day">Sunset theme</option>
-            </select>
-        </header>
+                <form onsubmit="authContext.handleLogin(event)" class="form-grid">
+                    <label for="login-username">Username</label>
+                    <input class="secondary-container mid-box" type="text" id="login-username" name="username" required>
 
-        <!-- aside control bar -->
-        <aside class="info-container primary-container">
-            <div style="font-weight: bold">Legend</div>
+                    <label for="login-password">Password</label>
+                    <input class="secondary-container mid-box" type="password" id="login-password" name="password"
+                        required>
 
-            <div class="horizontal-sep"></div>
-
-            <!-- legend -->
-            <div class="legend-grid">
-                <div class="dot" style="background-color: var(--accent-start)"></div>
-                <div>Start</div>
-                <div class="dot" style="background-color: var(--accent-end)"></div>
-                <div>End</div>
-
-                <div class="dot" style="background-color: var(--bg2)"></div>
-                <div>Wall</div>
-                <div class="dot" style="background-color: var(--bg1)"></div>
-                <div>Frontier</div>
-
-                <div class="dot" style="background-color: var(--accent-primary)"></div>
-                <div>Visited</div>
-                <div class="dot" style="background-color: var(--accent-secondary)"></div>
-                <div>Path</div>
+                    <div class="form-actions form-grid">
+                        <button type="submit" class="secondary-container mid-box button">
+                            Log In
+                        </button>
+                        <p style="font-size:0.7rem">Not registered?: <a href="#"
+                                onclick="userDashboard.showSignupForm()">Sign up</a></p>
+                    </div>
+                </form>
             </div>
+        </div>
 
-            <div class="horizontal-sep"></div>
+        <div id="user-profile" class="user-profile hidden">
+            <h3>These are <span id="user-name"></span>'s Mazes:</h3>
+            <div id="user-boards" class="secondary-container"></div>
+        </div>
 
-            <!-- log -->
-            <div class="log-container secondary-container" id="log"></div>
+        <div class="horizontal-sep"></div>
 
-            <div class="horizontal-sep"></div>
+        <!-- saveBoard -->
+        <div class="form-grid">
+            <input type="text" placeholder="Name of the maze" class="secondary-container mid-box" id="boardNameInput">
+            <button type="submit" class="secondary-container mid-box button" onclick="handleSaveBoard(event)">Save
+                Maze!</button>
+        </div>
+    </aside>
 
-            
-            <!-- login / signup -->
-            <div class="user-dashboard" id="user-dashboard">
-                <div id="signup-form" class="registration-form">
-                    <div style="font-weight: bold">Register</div>
-                    <div class="horizontal-sep"></div>
-                    
-                    <form onsubmit="authContext.handleSignup(event)" class="form-grid">
-                        <label for="signup-username">Username</label>
-                        <input
-                            class="secondary-container mid-box"
-                            type="text"
-                            id="signup-username"
-                            name="username"
-                            pattern="^[A-Za-z0-9!#$%&*^_-~]{3,30}$"
-                            required
-                            >
-                            
-                            <label for="signup-email">Email</label>
-                            <input
-                            class="secondary-container mid-box"
-                            type="email"
-                            id="signup-email"
-                            name="email"
-                            pattern="^[^@]+@[^@]+\.[^@]+$"
-                            required
-                            >
-                            
-                            <label for="signup-password">Password</label>
-                            <input
-                            class="secondary-container mid-box"
-                            type="password"
-                            id="signup-password"
-                            name="password"
-                            pattern="^[A-Za-z0-9!#$%&*^_-~]{6,30}$"
-                            required
-                            >
-                            
-                            <div class="form-actions form-grid">
-                                <button type="submit" class="secondary-container mid-box button">Sign Up</button>
-                                <p style="font-size:0.7rem">Already registered: <a href="#" onclick="userDashboard.showLoginForm()">Log In</a>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-                
-                <div id="login-form" class="registration-form hidden">
-                    <div style="font-weight: bold">Login</div>
-                    <div class="horizontal-sep"></div>
-                    
-                    <form onsubmit="authContext.handleLogin(event)" class="form-grid">
-                        <label for="login-username">Username</label>
-                        <input
-                        class="secondary-container mid-box"
-                        type="text"
-                        id="login-username"
-                        name="username"
-                        required
-                        >
-                        
-                        <label for="login-password">Password</label>
-                        <input
-                        class="secondary-container mid-box"
-                        type="password"
-                        id="login-password"
-                        name="password"
-                        required
-                        >
-                        
-                        <div class="form-actions form-grid">
-                            <button type="submit" class="secondary-container mid-box button">
-                                Log In
-                            </button>
-                            <p style="font-size:0.7rem">Not registered?: <a href="#" onclick="userDashboard.showSignupForm()">Sign up</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            <div id="user-profile" class="user-profile hidden">
-                <h3><span id="user-name"></span>'s boards:</h3>
-                <div id="user-boards" class="secondary-container"></div>
-            </div>
+    <main class="board-container" id="board-wrapper">
+        <canvas id="board-canvas"></canvas>
+    </main>
+</body>
 
-            <div class="horizontal-sep"></div>
-
-            <!-- saveBoard -->
-            <div class="form-grid">
-                <input type="text" class="secondary-container mid-box" id="boardNameInput">
-                <button type="submit" class="secondary-container mid-box button" onclick="handleSaveBoard(event)">Save board!</button>
-            </div>
-        </aside>
-
-        <main class="board-container" id="board-wrapper">
-            <canvas id="board-canvas"></canvas>
-        </main>
-    </body>
 </html>

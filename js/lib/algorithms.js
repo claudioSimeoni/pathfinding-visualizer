@@ -15,37 +15,6 @@ function syncDFS(y, x) {
     syncDFS(y - 1, x);
 }
 
-function randomMaze() {
-    let goodMaze = 0;
-    // let count = 0; 
-
-    while (!goodMaze) {
-        clearVisited();
-        // count++; 
-
-        for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < cols; j++) {
-                if (grid[i][j] == "start" || grid[i][j] == "end") continue;
-                if (Math.random() < 0.30) grid[i][j] = "wall";
-                else grid[i][j] = "empty";
-            }
-        }
-
-        if(start === null){
-            break;
-        }
-
-        stop = 0;
-        syncDFS(start[0], start[1]);
-        if (stop) goodMaze = 1;
-    }
-
-    // console.log(count);  
-
-    clearVisited();
-    drawCanvas();
-}
-
 async function retrievePath() {
     let currCell = [end[0], end[1]];
     let stack = [];
@@ -58,7 +27,7 @@ async function retrievePath() {
     for (let i = stack.length - 1; i >= 0; i--) {
         visited[stack[i][0]][stack[i][1]] = 2;
         drawCanvas();
-        await sleep();
+        await sleep(canvasSleep);
     }
 }
 

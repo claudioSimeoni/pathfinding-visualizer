@@ -9,13 +9,23 @@ make the code maintainable and good in general, ask geppetto about important thi
 
 
 . check the problems with async
+(you have also the bug that when you run twice the dfs, the second times after it reaches the end, it goes on)
+
 . add algorithms 
 . do the guide, the readme and the license
 . add all the comments and refactor everything
 . make the number of cell and the sizes fixed
-. add that when you slide to set walls you are vibing
-. learn everything you are missing and then update all the notes
+. add that when you slide to set walls you are vibing 
+(use the mousover mousedown etc)
 
+. learn everything you are missing and then update all the notes
+. solve login problem
+. take a look at the part of input validating and vulnerabilities
+. canvas and in general that adapts to the page? 
+
+. the idea is, once you think you are done, you : -try the code on the vm, -read the assignment carefully, -check ALL the code, -testtesttest, -format the code and comment it well
+
+.do all of the well understanding all the code of others and in general understand all the pweb features you have not learned yet
 
 understanding all of this local hosting stuff, xampp setup guide stuff
 understanding well the workflow in general and how async actually works
