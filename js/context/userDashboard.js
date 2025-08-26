@@ -13,25 +13,24 @@ class UserDashboard{
     }
 
     static htmlCard(name, board_id, repr, timestamp) {
-        const safeName = escapeHTML(name);
-        const safeBoardId = escapeHTML(board_id);
-        const safeRepr = escapeHTML(repr);
-        const safeTimestamp = escapeHTML(timestamp);
+        // const safeName = escapeHTML(name);
+        // const safeBoardId = escapeHTML(board_id);
+        // const safeRepr = escapeHTML(repr);
+        // const safeTimestamp = escapeHTML(timestamp);
 
         return `
             <div id="card-board-${board_id}">
                 <div class="card">
                     <div class="card-content">
                         <strong><p>${name}</p></strong>
-                        <p class="card-date">created on ${timestamp}</p>
-                        <canvas width="200" height="200" id="board-${board_id}"></canvas>
+                        <p class="card-date">Created on ${timestamp}</p>
                     </div>
                     <div class="card-content">
-                        <button class="button secondary-button" onclick="gameCanvas.load('${repr}')">Load it!</button>
-                        <button class="button accent-button" onclick="handleDeleteBoard('${board_id}')">Delete</button>
+                        <button class="button secondary-container" onclick="loadNewRepr('${repr}')">Load it!</button>
+                        <button class="button secondary-container" onclick="handleDeleteBoard('${board_id}')">Delete</button>
                     </div>
                 </div>
-                <hr class="divider">
+                <div class="horizontal-sep">
             </div>
         `;
     }
@@ -41,17 +40,10 @@ class UserDashboard{
         const boardsList = document.getElementById("user-boards");
 
         boardsList.insertAdjacentHTML("beforeend", newBoard);
-
-        const canvas = new GameCanvas(`board-${board_id}`, {
-            cellList: new Decompressor(repr).getCellList(),
-            gridSize: 32,
-        });
     }
 
     removeBoard(board_id) {
         const boardCard = document.getElementById(`card-board-${board_id}`);
-        const boardCanvas = document.getElementById(`board-${board_id}`);
-        boardCanvas.remove();
         boardCard.remove();
     }
 
@@ -74,6 +66,7 @@ class UserDashboard{
     }
 
     showLoginForm(){
+        document.getElementById("user-dashboard").classList.remove("hidden"); 
         document.getElementById("signup-form").classList.add("hidden"); 
         document.getElementById("login-form").classList.remove("hidden"); 
     }
@@ -86,5 +79,6 @@ class UserDashboard{
     hideForms(){
         document.getElementById("login-form").classList.add("hidden");         
         document.getElementById("signup-form").classList.add("hidden");
+        document.getElementById("user-dashboard").classList.add("hidden"); 
     }
 }

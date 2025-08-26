@@ -1,0 +1,60 @@
+/* legend */
+.legend-container {
+    width: 100%;
+    height: 15%;
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 3fr;
+    /* colonne: 1 3 1 3 */
+    grid-template-rows: repeat(3, auto);
+    /* 3 righe */
+    gap: 0.5em 1em;
+    /* spazio tra celle */
+    align-items: center;
+}
+
+.dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* scroll */
+.log-container {
+    width: 100%;
+    height: 15%;
+    padding: 0.5em; 
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#user-boards {
+    padding: 0.5em;
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* form */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.8em 1.2em;
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    margin-top: 1em;
+    text-align: center;
+}
+
+/* user dashboard */
+.user-dashboard,
+.user-profile {
+    height: 55%;
+    width: 100%;
+}

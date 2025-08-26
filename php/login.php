@@ -9,8 +9,9 @@ if($conn->connect_error){
 }
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
-    $username = $_POST["username"]; 
-    $password = $_POST["password"]; 
+    $data = json_decode(file_get_contents("php://input"), true);
+    $username = $data["username"];
+    $password = $data["password"];
 
     $query = $conn->prepare("SELECT user_id, email, username, password FROM users WHERE username = ?"); 
     $query->bind_param("s", $username); 

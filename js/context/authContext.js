@@ -49,8 +49,8 @@ class AuthContext{
     async handleLogin(event){
         event.preventDefault(); 
 
-        username = document.getElementById("login-username").value; 
-        password = document.getElementById("login-password").value; 
+        const username = document.getElementById("login-username").value; 
+        const password = document.getElementById("login-password").value; 
 
         const { user, token, loggedIn } = await apiContext.login(username, password); 
 

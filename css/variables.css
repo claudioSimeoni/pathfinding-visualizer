@@ -1,18 +1,31 @@
-:root {
-  --bg1: #344A6C;  /* borders - blu notte chiaro */
-  --bg2: #2B3E5C;  /* walls - blu notte medio */
-  --bg3: #22324B;  /* primary containers - blu notte intenso */
-  --bg4: #19263A;  /* background - blu notte profondo */
+/* module concluded */
+:root.night {
+	--bg1: #344A6C;  
+	--bg2: #2B3E5C;  
+	--bg3: #22324B;  
+	--bg4: #19263A; 
 
-  /* Accent colors */
-  --accent-primary: #6C63FF;   /* bottoni, link - indaco luminoso */
-  --accent-secondary: #4DA6FF; /* highlights - azzurro brillante */
-  --accent-start: #8AB4F8;     /* success - blu cielo pastello */
-  --accent-end: #A45DFF;       /* error - viola neon */
-  
-  /* Text colors */
-  --text-primary: #F5F7FA;     /* testo principale - quasi bianco */
-  --text-secondary: #B0BED9;   /* subtext - grigio-azzurro chiaro */
-  --text-inverse: #0F1625;     /* testo su sfondi molto chiari (se usi box invertiti) */
-  --text-muted: #7A869A;       /* disabilitato / hint */
+	--accent-primary: #6C63FF;   
+	--accent-secondary: #00b3a4; 
+	--accent-start: #000000;     
+	--accent-end: #000000;       
+
+
+	--text-primary: #F5F7FA;     
+	--text-secondary: #B0BED9;    
+}
+
+:root.day {
+  	--bg1: #d3d3d3;
+  	--bg2: #e0e0e0;
+  	--bg3: #d7d7d7;
+  	--bg4: #bdbdbd;
+
+  	--accent-primary: #ff6a6a;
+  	--accent-secondary: #fdff97;
+  	--accent-start: #ffffff;
+  	--accent-end: #ffffff;
+
+  	--text-primary: #1F2937;
+  	--text-secondary: #4B5563;
 }

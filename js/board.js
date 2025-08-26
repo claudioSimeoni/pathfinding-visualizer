@@ -7,7 +7,13 @@ function handleSaveBoard(event) {
   }
 
   const boardName = document.getElementById("boardNameInput").value;
-  const repr = new Compressor(Array.from(gameCanvas.cellList)).getBuffer();
+  
+  if(boardName === ""){
+    alert("You must enter a name to assign to the board!"); 
+    return; 
+  }
+  
+  const repr = getRepr(grid); 
 
   apiContext.saveBoard(boardName, repr).then(({ data }) =>
     userDashboard.addBoard({
@@ -23,3 +29,39 @@ function handleDeleteBoard(board_id) {
   apiContext.deleteBoard(board_id);
   userDashboard.removeBoard(board_id);
 }
+
+function handleCanvasClick(event){
+    if(elem === null){
+        alert("Select one between WALL, start, end & ERASER");
+        return; 
+    }
+    
+    const canvas = document.getElementById("board-canvas"); 
+    const ctx = canvas.getContext("2d");  
+
+    let [x, y] = [Math.floor(event.offsetX / cellSize), Math.floor(event.offsetY / cellSize)];
+
+    if(grid[y][x] === "start"){
+        start = null; 
+    }
+    else if(grid[y][x] === "end"){
+        end = null; 
+    }
+    
+    if(elem === "start"){
+        if(start !== null){
+            grid[start[0]][start[1]] = "empty"; 
+        }
+        start = [y, x]; 
+    }
+    else if(elem === "end"){
+        if(end !== null){
+            grid[end[0]][end[1]] = "empty"; 
+        }
+        end = [y, x]; 
+    }
+
+    grid[y][x] = elem; 
+    drawCanvas(); 
+}
+

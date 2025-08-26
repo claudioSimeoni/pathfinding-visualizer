@@ -1,5 +1,5 @@
 class ApiContext {
-    constructor() { };
+    constructor() { }
 
     // TODO: add a function handle response ? since the code is duplicated
 

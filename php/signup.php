@@ -1,17 +1,23 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+header('Content-Type: application/json');
 require_once "dbaccess.php";
 session_start();
 
-$conn = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME); 
+$conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME); 
 
 if($conn->connect_error){
     die("Connection failed" . $conn->connect_error); 
 }
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
-    $username = $_POST["username"]; 
-    $email = $_POST["email"]; 
-    $password = $_POST["password"]; 
+    $data = json_decode(file_get_contents("php://input"), true);
+    $username = $data["username"];
+    $email = $data["email"];
+    $password = $data["password"];
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT); 
 
@@ -45,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $query->bind_param("sss", $username, $email, $hashed_password); 
 
     if($query->execute()){
-        $user_id = $query->insert_id; 
+        $user_id = $conn->insert_id; 
         $boards = []; 
 
         $token = bin2hex(random_bytes(32)); 
