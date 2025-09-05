@@ -1,19 +1,5 @@
 "use strict"
 
-function setTheme() {
-    const themeSelector = document.getElementById("theme-selector");
-    const theme = themeSelector.value;
-    const html = document.documentElement;
-
-    /* Remove previous theme */
-    html.classList.remove('day', 'night');
-
-    /* Add the new theme */
-    html.classList.add(theme);
-    updateColors();
-    drawCanvas();
-}
-
 function initialize() {
     /* initializing canvas */
     let canvas = document.getElementById("board-canvas");
@@ -24,21 +10,20 @@ function initialize() {
     boardX = canvas.width = canvas_wrapper.clientWidth;
     boardY = canvas.height = canvas_wrapper.clientHeight;
 
-    cellSize = Math.floor(boardX / cols);
-    rows = Math.floor(boardY / boardX * cols);
+    cellX = boardX / cols;
+    cellY = boardY / rows;
 
     /* initializing speed slider */
     let slider = document.getElementById("speed");
     slider.addEventListener("input", () => { canvasSleep = 504 - slider.value; console.log(canvasSleep) });
-
     canvasSleep = 504 - slider.value;
 
-    /* initializing theme */
-    const themeSelector = document.getElementById("theme-selector");
-    themeSelector.addEventListener('change', setTheme);
+    /* initializing the slide to set walls */
+    canvas.addEventListener("mousedown", (e) => handleMouseDown(e));
+    window.addEventListener("mouseup", (e) => handleMouseUp(e));
+    canvas.addEventListener("mousemove", (e) => handleCanvasSliding(e));
 
     initCanvas();
-    setTheme();
 }
 
 window.addEventListener("load", () => {

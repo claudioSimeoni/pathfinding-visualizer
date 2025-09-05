@@ -3,7 +3,8 @@ let rows = 32;
 let cols = 54;
 let boardX = 800;
 let boardY = 800;
-let cellSize = 30;
+let cellX = 30;
+let cellY = 30; 
 
 /* INF variables needed for bfs */
 const INF = 1000; 
@@ -21,6 +22,7 @@ let visited = [];
 let parent = [];
 
 let stop = 1;
+let pressed = 0;
 
 /* log infos */
 let gameId = 1; 

@@ -1,5 +1,5 @@
 /* module concluded */
-:root.night {
+:root {
 	--bg1: #344A6C;  
 	--bg2: #2B3E5C;  
 	--bg3: #22324B;  
@@ -10,22 +10,6 @@
 	--accent-start: #000000;     
 	--accent-end: #000000;       
 
-
 	--text-primary: #F5F7FA;     
 	--text-secondary: #B0BED9;    
-}
-
-:root.day {
-  	--bg1: #d3d3d3;
-  	--bg2: #eae9e9;
-  	--bg3: #d7d7d7;
-  	--bg4: #bdbdbd;
-
-  	--accent-primary: #ff9f31;
-  	--accent-secondary: #fffd6e;
-  	--accent-start: #ffffff;
-  	--accent-end: #ffffff;
-
-  	--text-primary: #1F2937;
-  	--text-secondary: #4B5563;
 }

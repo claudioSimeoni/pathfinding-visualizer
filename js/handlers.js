@@ -1,4 +1,3 @@
-// this should probabily be the handlers file
 function handleSaveBoard(event) {
   event.preventDefault();
 
@@ -40,7 +39,7 @@ function handleCanvasClick(event){
     const canvas = document.getElementById("board-canvas"); 
     const ctx = canvas.getContext("2d");  
 
-    let [x, y] = [Math.floor(event.offsetX / cellSize), Math.floor(event.offsetY / cellSize)];
+    let [x, y] = [Math.floor(event.offsetX / cellX), Math.floor(event.offsetY / cellY)];
 
     if(grid[y][x] === "start"){
         start = null; 
@@ -64,5 +63,40 @@ function handleCanvasClick(event){
 
     grid[y][x] = elem; 
     drawCanvas(); 
+}	
+
+// handling the sliding
+function handleMouseDown(event){
+    pressed = 1;
+	handleCanvasClick(event);
 }
 
+function handleMouseUp(){
+    pressed = 0; 
+}
+
+function handleCanvasSliding(event){
+	if(pressed){
+		handleCanvasClick(event);
+	}
+}
+
+function handleSelectElem(event){
+    let button = event.target; 
+    elem = button.value; 
+
+    let elem_buttons = document.querySelectorAll(".elem-button");  
+    for(let current_button of elem_buttons) current_button.disabled = false; 
+
+    button.disabled = true; 
+}
+
+function handleLog(){
+    let currentGameLog = "[" + gameId + "] " + algorithm + " visited " + nodesVisited + 
+                         " nodes in " + totalTime + " ms. " + "Path length: " + pathLength + "!"; 
+    let logElement = document.getElementById("log"); 
+    let newPar = document.createElement("p"); 
+    newPar.innerHTML = currentGameLog; 
+
+    logElement.appendChild(newPar); 
+}

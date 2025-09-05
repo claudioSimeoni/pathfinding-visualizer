@@ -1,6 +1,6 @@
 function drawLetter(letter, row, col, color, fontSize, ctx) {
-    const x = col * cellSize + cellSize / 2;
-    const y = row * cellSize + cellSize / 2;
+    const x = col * cellX + cellX / 2;
+    const y = row * cellY + cellY / 2;
 
     ctx.fillStyle = color;
     ctx.font = `${fontSize}px Arial`;
@@ -36,8 +36,8 @@ function drawCanvas() {
                     else ctx.fillStyle = BG3;
             }
 
-            ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-            ctx.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
+            ctx.fillRect(j * cellX, i * cellY, cellX, cellY);
+            ctx.strokeRect(j * cellX, i * cellY, cellX, cellY);
 
             if (grid[i][j] === "start") {
                 drawLetter("S", i, j, TEXT_PRIMARY, 20, ctx);
@@ -93,16 +93,16 @@ async function randomMaze() {
     await sleep(10); 
     
     let goodMaze = 0;
-    // let count = 0; 
+    let count = 0; 
 
     while (!goodMaze) {
         clearVisited();
-        // count++; 
+        count++; 
 
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
                 if (grid[i][j] == "start" || grid[i][j] == "end") continue;
-                if (Math.random() < 0.30) grid[i][j] = "wall";
+                if (Math.random() < 0.45) grid[i][j] = "wall";
                 else grid[i][j] = "empty";
             }
         }
@@ -116,7 +116,7 @@ async function randomMaze() {
         if (stop) goodMaze = 1;
     }
 
-    // console.log(count);  
+    console.log(count);  
 
     clearVisited();
     drawCanvas();

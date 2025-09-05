@@ -14,12 +14,11 @@
     <script src="../js/lib/algorithms.js" defer></script>
     <script src="../js/lib/canvas.js" defer></script>
     <script src="../js/lib/colors.js" defer></script>
-    <script src="../js/lib/handlers.js" defer></script>
     <script src="../js/lib/init.js" defer></script>
     <script src="../js/context/userDashboard.js" defer></script>
     <script src="../js/context/authContext.js" defer></script>
     <script src="../js/context/apiContext.js" defer></script>
-    <script src="../js/board.js" defer></script>
+    <script src="../js/handlers.js" defer></script>
     <script src="../js/globals.js" defer></script>
 </head>
 
@@ -28,8 +27,8 @@
     <header class="primary-container" id="toolbar">
         <div class="vertical-sep"></div>
 
-        <div class="tb-logo button">
-            <h3>Pathfinding Visualizer</h3>
+        <div class="tb-logo button" id="guide-button">
+            <h3><a href="guide.html">Pathfinding Visualizer</a></h3>
         </div>
 
         <div class="vertical-sep"></div>
@@ -54,10 +53,10 @@
         <div class="vertical-sep"></div>
 
         <div class="tb-elements">
-            <button class="elem-button button" value="wall" onclick="selectElem(event)">Wall</button>
-            <button class="elem-button button" value="start" onclick="selectElem(event)">Start</button>
-            <button class="elem-button button" value="end" onclick="selectElem(event)">End</button>
-            <button class="elem-button button" value="empty" onclick="selectElem(event)">Eraser</button>
+            <button class="elem-button button" value="wall" onclick="handleSelectElem(event)">Wall</button>
+            <button class="elem-button button" value="start" onclick="handleSelectElem(event)">Start</button>
+            <button class="elem-button button" value="end" onclick="handleSelectElem(event)">End</button>
+            <button class="elem-button button" value="empty" onclick="handleSelectElem(event)">Eraser</button>
         </div>
 
         <div class="vertical-sep"></div>
@@ -74,12 +73,6 @@
         </div>
 
         <div class="vertical-sep"></div>
-
-        <!-- theme -->
-        <select class="secondary-container big-box button" id="theme-selector">
-            <option value="night">Night theme</option>
-            <option value="day">Sunset theme</option>
-        </select>
     </header>
 
     <!-- aside control bar -->

@@ -27,7 +27,7 @@ async function retrievePath() {
     for (let i = stack.length - 1; i >= 0; i--) {
         visited[stack[i][0]][stack[i][1]] = 2;
         drawCanvas();
-        await sleep(canvasSleep);
+        await sleep(50);
     }
 }
 
@@ -115,7 +115,7 @@ async function runAlgorithm(){
     else if(algorithm == "bfs") await bfs(start[0], start[1]); 
     
     if(pathLength > 0){
-        log(); 
+        handleLog(); 
         gameId++; 
     }
 }
