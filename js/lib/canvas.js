@@ -36,9 +36,11 @@ function drawCanvas() {
                     else ctx.fillStyle = BG3;
             }
 
+            /* drawing cell and border */
             ctx.fillRect(j * cellX, i * cellY, cellX, cellY);
             ctx.strokeRect(j * cellX, i * cellY, cellX, cellY);
 
+            /* drawing letters */
             if (grid[i][j] === "start") {
                 drawLetter("S", i, j, TEXT_PRIMARY, 20, ctx);
             }
@@ -54,6 +56,7 @@ function loadNewRepr(repr) {
     start = null;
     end = null;
     clearVisited();
+
     drawCanvas();
 }
 
@@ -62,52 +65,56 @@ function initCanvas() {
     clearGrid();
     clearVisited();
     clearParent();
-
     resetStartEnd();
+
     drawCanvas();
 }
 
-async function resetCanvas() {
-    stop = 1;
-    await sleep(10);
+/* handling top right buttons pressing */
+function resetCanvas() {
+    /* if an alg is running return */
+    if (!stop) {
+        return;
+    }
 
     clearGrid();
     clearVisited();
     clearParent();
-
     resetStartEnd();
 
     drawCanvas();
 }
 
-async function clearPath() {
-    stop = 1;
-    await sleep(10);
+function clearPath() {
+    /* if an alg is running return */
+    if (!stop) {
+        return;
+    }
 
     clearVisited();
     drawCanvas();
 }
 
-async function randomMaze() {
-    stop = 1; 
-    await sleep(10); 
-    
-    let goodMaze = 0;
-    let count = 0; 
+function randomMaze() {
+    /* if an alg is running return */
+    if (!stop) {
+        return;
+    }
 
+    /* generating mazes until a path exists between start and end */
+    let goodMaze = 0;
     while (!goodMaze) {
         clearVisited();
-        count++; 
-
+    
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
                 if (grid[i][j] == "start" || grid[i][j] == "end") continue;
-                if (Math.random() < 0.45) grid[i][j] = "wall";
+                if (Math.random() < 0.30) grid[i][j] = "wall";
                 else grid[i][j] = "empty";
             }
         }
 
-        if(start === null){
+        if (start === null) {
             break;
         }
 
@@ -116,12 +123,11 @@ async function randomMaze() {
         if (stop) goodMaze = 1;
     }
 
-    console.log(count);  
-
     clearVisited();
     drawCanvas();
 }
 
+/* utilities for the matrices */
 function resetStartEnd() {
     grid[0][0] = "start";
     grid[rows - 1][cols - 1] = "end";

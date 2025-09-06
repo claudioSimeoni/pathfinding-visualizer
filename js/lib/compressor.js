@@ -1,3 +1,4 @@
+/* the compression is simply a bit string where a wall is a 1 and everything else is a 0 */
 const elemToId = {
     "empty": "0",
     "start": "0",

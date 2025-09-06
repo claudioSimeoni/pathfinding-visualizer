@@ -1,22 +1,19 @@
 <?php
-header('Content-Type: application/json');
 require_once "dbaccess.php";
-
 session_start(); 
 
 $conn = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME); 
 
-if($conn->connect_error){
+if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $data = json_decode(file_get_contents("php://input"), true); 
 
-    $data = json_decode(file_get_contents("php://input"), true); // true makes it an associative array, you are getting stuff sent with fetch
-
-    $board = $data["board"]; 
-    $board_name = $data["name"]; 
-    $user_id = $_SESSION["user_id"]; 
+    $board = $data["board"];
+    $board_name = $data["name"];
+    $user_id = $_SESSION["user_id"];
 
     if (!isset($_SESSION["user_id"]) || !isset($_SESSION["token"])) {
         header("HTTP/1.1 401 Unauthorized");
@@ -32,10 +29,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $query->bind_param("ssi", $board, $board_name, $user_id); 
     $query->execute(); 
 
-    if($query->affected_rows){
+    if ($query->affected_rows) {
         $board_id = $query->insert_id;
 
-        // Fetch the creation timestamp
         $timestamp_query = $conn->prepare(
             "SELECT creation_timestamp FROM boards WHERE board_id = ?"
         );
@@ -54,8 +50,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 "timestamp" => $timestamp_row["creation_timestamp"],
             ],
         ]);
-    }
-    else{
+    } else {
         echo json_encode([
             "status" => "error",
             "message" => "Failed to save board",        

@@ -1,36 +1,45 @@
-class UserDashboard{
-    constructor(){};
-
-    // note: this sanitize function may be insufficient to cover all code injection attacks,
-    // use a proper sanitizing function
-    static escapeHTML(str) {
-        return String(str)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
+class UserDashboard {
+    constructor() { };
 
     static htmlCard(name, board_id, repr, timestamp) {
-        // const safeName = escapeHTML(name);
-        // const safeBoardId = escapeHTML(board_id);
-        // const safeRepr = escapeHTML(repr);
-        // const safeTimestamp = escapeHTML(timestamp);
+        /* Basic HTML escape */
+        const escapeHTML = (str) =>
+            String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        /* Escape for JavaScript strings inside HTML attributes */
+        const escapeJS = (str) =>
+            String(str)
+                .replace(/\\/g, "\\\\")
+                .replace(/'/g, "\\'")
+                .replace(/"/g, '\\"')
+                .replace(/\r/g, "\\r")
+                .replace(/\n/g, "\\n")
+                .replace(/</g, "\\x3C")
+                .replace(/>/g, "\\x3E");
+
+        let safeName = escapeHTML(name);
+        let safeBoardId = escapeHTML(board_id);
+        let safeRepr = escapeJS(repr);
+        let safeTimestamp = escapeHTML(timestamp);
 
         return `
-            <div id="card-board-${board_id}">
+            <div id="card-board-${safeBoardId}">
                 <div class="card">
                     <div class="card-content">
-                        <strong><p>${name}</p></strong>
-                        <p class="card-date">Created on ${timestamp}</p>
+                        <strong><p>${safeName}</p></strong>
+                        <p class="card-date">Created on ${safeTimestamp}</p>
                     </div>
                     <div class="card-content">
-                        <button class="button secondary-container" onclick="loadNewRepr('${repr}')">Load it!</button>
-                        <button class="button secondary-container" onclick="handleDeleteBoard('${board_id}')">Delete</button>
+                        <button class="button secondary-container" onclick="loadNewRepr('${safeRepr}')">Load it!</button>
+                        <button class="button secondary-container" onclick="handleDeleteBoard('${safeBoardId}')">Delete</button>
                     </div>
                 </div>
-                <div class="horizontal-sep">
+                <div class="horizontal-sep"></div>
             </div>
         `;
     }
@@ -65,20 +74,18 @@ class UserDashboard{
         });
     }
 
-    showLoginForm(){
-        document.getElementById("user-dashboard").classList.remove("hidden"); 
-        document.getElementById("signup-form").classList.add("hidden"); 
-        document.getElementById("login-form").classList.remove("hidden"); 
-    }
-
-    showSignupForm(){
-        document.getElementById("login-form").classList.add("hidden");         
-        document.getElementById("signup-form").classList.remove("hidden"); 
-    }
-
-    hideForms(){
-        document.getElementById("login-form").classList.add("hidden");         
+    showLoginForm() {
         document.getElementById("signup-form").classList.add("hidden");
-        document.getElementById("user-dashboard").classList.add("hidden"); 
+        document.getElementById("login-form").classList.remove("hidden");
+    }
+
+    showSignupForm() {
+        document.getElementById("login-form").classList.add("hidden");
+        document.getElementById("signup-form").classList.remove("hidden");
+    }
+
+    hideForms() {
+        document.getElementById("login-form").classList.add("hidden");
+        document.getElementById("signup-form").classList.add("hidden");
     }
 }

@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="../227-2275594_tiny-maze-puzzle-icons-png-small-maze-puzzle.jpeg">
-    
     <link rel="stylesheet" href="../css/guide.css">
 </head>
 
@@ -22,18 +21,20 @@
         <hr>
         <br>
 
-        A Pathfinding Visualizer allows the user to see some "search algorithms" in action on a grid.
+        A Pathfinding Visualizer allows the user to see some "search algorithms" in action on a grid. In this case
+        you will have the possibility to visualize three algorithms: <b>Depth First Search, Breadth First Search, and
+            A*</b>.
 
         <br>
         <br>
         <hr>
 
         <h2>Setting up</h2>
-        As a first step you should set up the <b>Start</b> and the <b>End</b> of the search, you can do so by 
-        clicking on the respective element on the toolbar and then by clicking the position you wanna set it to. 
-        Now it is time to set the walls, you can do it both by using the random maze (in this case for a path to 
-        exist between the two you must set the start and the end first) and setting the walls by hand (note that 
-        after you select the <b>Wall</b> element, once you click on the canvas, if you hold the click and slide 
+        As a first step you should set up the <b>Start</b> and the <b>End</b> of the search, you can do so by
+        clicking on the respective element on the toolbar and then by clicking the position you wanna set it to.
+        Now it is time to set the walls, you can do it both by using the random maze (in this case for a path to
+        exist between the two you must set the start and the end first) and setting the walls by hand (note that
+        after you select the <b>Wall</b> element, once you click on the canvas, if you hold the click and slide
         walls will still be placed). You can also remove walls with the <b>Eraser</b> element.
 
         <br>
@@ -41,16 +42,16 @@
         <hr>
 
         <h2>Running the algorithm</h2>
-        Now you can eventually select the algorithm and the speed on the toolbar, once you have done this you can run 
-        the algorithm with the button on the top right. You will see an animation on the canvas showing each step of 
-        the search. Once the path is find some information will be added on the log under the legend.
+        Now you can eventually select the algorithm and the speed on the toolbar, once you have done this you can run
+        the algorithm with the button on the top right. You will see an animation on the canvas showing each step of
+        the search. Once the path is found some information will be added on the log under the legend.
 
         <br>
         <br>
         <hr>
 
         <h2>Reverting the state of the maze</h2>
-        Once you finished the run, you have the following options: 
+        Once you finished the run, you have the following options:
         <ol>
             <li>Clearing the path and the visited cells with the dedicated button and run another algorithm.</li>
             <li>Resetting the board with the dedicated button.</li>
@@ -61,15 +62,34 @@
         <hr>
 
         <h2>Algorithms implemented</h2>
+        <ol>
+            <li><b>DFS</b>: the most common graph searching algorithm, it simply visits the current node and runs
+                recursively in all the other directions, in this case the order of the directions is fixed, one could 
+                also implement it randomizing the directions. Time complexity: O(n). Space complexity: O(n).
+            </li>
+            <li><b>BFS</b>: the bfs computes the shortest path from the start to each cell by spreading each iteration
+                from
+                one of the visited cells with the shortest distance from the start. Time complexity: O(n). Space
+                complexity: O(n).
+            </li>
+            <li>
+                <b>A*</b>: this algorithm works as Dijkstra's algorithm but by using an heuristic: the next node, instead of
+                being the one with the current shortest distance (between the not fully visited ones), will be the one
+                with the shortest "distance + (manhattan distance from the end point)". In this way we avoid paths that
+                spread to far from the end point we want to reach. Note that differently from the other two algorithms,
+                we are using the final position as an information, in this sense the algorithm is said to be informed.
+                Time complexity: O(n<sup>2</sup>). Space complexity: O(n).
+            </li>
+        </ol>
+        The n in the complexities refers to the total number of cells.
 
         <br>
         <br>
         <hr>
 
-        <h2>Some other features</h2>
-        Firstly you can select the <b>Theme</b> of the page on the top right corner. Secondly you can signup and save 
-        your favorite mazes on your profile and then load it whenever you want. Note that saving a board won't save the
-        positions of the start and the end.
+        <h2>Signing up</h2>
+        You can sign up and save your favorite mazes on your profile and then load it whenever you want. Note that
+        saving a board won't save the positions of the start and the end but only the maze.
 
         <br>
         <br>
@@ -77,7 +97,7 @@
         <br>
 
         <b><a href="index.html">Return to Pathfinding Visualizer</a></b>
-        
+
         <br>
         <br>
         <br>

@@ -1,38 +1,17 @@
-// DOM colors
+/* DOM colors */
 function cssVar(name) {
-	return getComputedStyle(document.documentElement)
-		.getPropertyValue(name)
-		.trim();
+	return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
-// Background colors
 BG1 = cssVar('--bg1');
 BG2 = cssVar('--bg2');
 BG3 = cssVar('--bg3');
 BG4 = cssVar('--bg4');
 
-// Accent colors
 ACCENT_PRIMARY = cssVar('--accent-primary');
 ACCENT_SECONDARY = cssVar('--accent-secondary');
 ACCENT_START = cssVar('--accent-start');
 ACCENT_END = cssVar('--accent-end');
 
-// Text colors
 TEXT_PRIMARY = cssVar('--text-primary');
 TEXT_SECONDARY = cssVar('--text-secondary');
-
-// Example: read current theme variables after applying theme
-function updateColors() {
-	BG1 = cssVar('--bg1');
-	BG2 = cssVar('--bg2');
-	BG3 = cssVar('--bg3');
-	BG4 = cssVar('--bg4');
-
-	ACCENT_PRIMARY = cssVar('--accent-primary');
-	ACCENT_SECONDARY = cssVar('--accent-secondary');
-	ACCENT_START = cssVar('--accent-start');
-	ACCENT_END = cssVar('--accent-end');
-
-	TEXT_PRIMARY = cssVar('--text-primary');
-	TEXT_SECONDARY = cssVar('--text-secondary');
-}

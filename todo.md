@@ -1,23 +1,10 @@
-My idea is to make a site with a grid at the center, you choose a starting and an ending point and you can see how different algs (DFS, BFS, A*) reach the end from the beginning. This seems easy to make but still quite impressive.
-
--do the history of the project
+-do the history of the project / read me 
 -tell about problems you had: eg the maze, firstly you did fisheryatesshuffle, then the current way using a montecarlo simulation to find out the average number of time it had to run 
 
 understanding well all of the xss and sqlinj function but in general take a look at all the advices and projects to every bro   
 
+
 make the code maintainable and good in general, ask geppetto about important things for step
-
-
-. check the problems with async
-(you have also the bug that when you run twice the dfs, the second times after it reaches the end, it goes on)
-
-. make a decent proportion for the speed slidebar
-. add algorithms 
-. improve the guide, the readme and the license
-
-. solve login problem
-
-. canvas and in general that adapts to the page? 
 
 . the idea is, once you think you are done, you : -try the code on the vm, -read the assignment carefully, -check ALL the code, -testtesttest, -format the code and comment it well
 . take a look at the part of input validating and vulnerabilities
@@ -29,6 +16,7 @@ make the code maintainable and good in general, ask geppetto about important thi
 
 . add all the comments and refactor everything
 . pay attention to the tab dimension 4
+. use someone to test
 
 understanding all of this local hosting stuff, xampp setup guide stuff
 understanding well the workflow in general and how async actually works

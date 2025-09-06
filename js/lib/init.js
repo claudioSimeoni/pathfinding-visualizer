@@ -1,5 +1,3 @@
-"use strict"
-
 function initialize() {
     /* initializing canvas */
     let canvas = document.getElementById("board-canvas");

@@ -1,6 +1,16 @@
-:root{
-    --bg3: #22324B;   
-    --text-primary: #ffffff;      
+:root {
+    --bg1: #344A6C;
+    --bg2: #2B3E5C;
+    --bg3: #22324B;
+    --bg4: #19263A;
+
+    --accent-primary: #6C63FF;
+    --accent-secondary: #00b3a4;
+    --accent-start: #000000;
+    --accent-end: #000000;
+
+    --text-primary: #F5F7FA;
+    --text-secondary: #B0BED9;
 }
 
 * {
@@ -11,8 +21,8 @@
 
 body {
     display: grid;
-    
-    grid-template-columns: 1fr 2fr 1fr; 
+
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 10fr;
 
     margin: 0em;
@@ -24,7 +34,28 @@ body {
     background-color: var(--bg3);
 }
 
-header{
+header {
     text-align: center;
     grid-column: span 3;
+}
+
+b,
+a {
+    color: var(--accent-secondary);
+}
+
+h1,
+h2 {
+    color: var(--accent-primary);
+}
+
+/* styling underlining text */
+::selection {
+    background: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+::-moz-selection {
+    background: var(--accent-primary);
+    color: var(--text-primary);
 }

@@ -1,16 +1,16 @@
-class AuthContext{
-    constructor(){
-        this.user = null; 
-        this.token = null; 
-        this.loggedIn = false; 
+class AuthContext {
+    constructor() {
+        this.user = null;
+        this.token = null;
+        this.loggedIn = false;
     }
 
-    async handleSignup(event){
-        event.preventDefault(); 
+    async handleSignup(event) {
+        event.preventDefault();
 
-        const usernameInput = document.getElementById("signup-username"); 
-        const emailInput = document.getElementById("signup-email"); 
-        const passwordInput = document.getElementById("signup-password"); 
+        const usernameInput = document.getElementById("signup-username");
+        const emailInput = document.getElementById("signup-email");
+        const passwordInput = document.getElementById("signup-password");
 
         if (!usernameInput.checkValidity()) {
             alert(
@@ -31,35 +31,35 @@ class AuthContext{
             return;
         }
 
-        const username = usernameInput.value; 
-        const email = emailInput.value; 
-        const password = passwordInput.value; 
+        const username = usernameInput.value;
+        const email = emailInput.value;
+        const password = passwordInput.value;
 
-        const { user, token, loggedIn } = await apiContext.signup(username, email, password); 
+        const { user, token, loggedIn } = await apiContext.signup(username, email, password);
 
-        this.user = user; 
-        this.token = token; 
-        this.loggedIn = loggedIn; 
+        this.user = user;
+        this.token = token;
+        this.loggedIn = loggedIn;
 
-        if(loggedIn){
-            userDashboard.displayUserProfile(user); 
+        if (loggedIn) {
+            userDashboard.displayUserProfile(user);
         }
     }
 
-    async handleLogin(event){
-        event.preventDefault(); 
+    async handleLogin(event) {
+        event.preventDefault();
 
-        const username = document.getElementById("login-username").value; 
-        const password = document.getElementById("login-password").value; 
+        const username = document.getElementById("login-username").value;
+        const password = document.getElementById("login-password").value;
 
-        const { user, token, loggedIn } = await apiContext.login(username, password); 
+        const { user, token, loggedIn } = await apiContext.login(username, password);
 
-        this.user = user; 
-        this.token = token; 
-        this.loggedIn = loggedIn; 
+        this.user = user;
+        this.token = token;
+        this.loggedIn = loggedIn;
 
-        if(loggedIn){
-            userDashboard.displayUserProfile(user); 
+        if (loggedIn) {
+            userDashboard.displayUserProfile(user);
         }
     }
 }

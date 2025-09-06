@@ -4,12 +4,13 @@ session_start();
 
 $conn = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME); 
 
-if($conn->connect_error){
+if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error); 
 }
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
+    
     $username = $data["username"];
     $password = $data["password"];
 
@@ -19,10 +20,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $result = $query->get_result(); 
 
-    if($result->num_rows > 0){
+    if ($result->num_rows > 0) {
         $user = $result->fetch_assoc(); 
 
-        if(password_verify($password, $user["password"])){
+        if (password_verify($password, $user["password"])) {
             $token = bin2hex(random_bytes(32)); 
             $_SESSION["user_id"] = $user["user_id"]; 
             $_SESSION["token"] = $token; 
@@ -36,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
             $boards = []; 
 
-            while($board = $boards_result->fetch_assoc()){
+            while ($board = $boards_result->fetch_assoc()) {
                 $boards[] = [
                     "board_id" => $board["board_id"],
                     "name" => $board["name"],
@@ -56,15 +57,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 ],
                 "token" => $token
             ]); 
-        } 
-        else{
+        } else {
             echo json_encode([
                 "status" => "error",
                 "message" => "Invalid password!"
             ]); 
         }
-    }
-    else{
+    } else {
         echo json_encode([
             "status" => "error",
             "message" => "User not registered!"

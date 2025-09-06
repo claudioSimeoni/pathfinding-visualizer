@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>DFS, BFS, A* Visualizer</title>
+    <title>Pathfinding Visualizer</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="../227-2275594_tiny-maze-puzzle-icons-png-small-maze-puzzle.jpeg">
-
     <link rel="stylesheet" href="../css/style.css">
+
     <script src="../js/lib/compressor.js" defer></script>
     <script src="../js/lib/algorithms.js" defer></script>
     <script src="../js/lib/canvas.js" defer></script>
@@ -156,16 +156,16 @@
                     </div>
                 </form>
             </div>
-        </div>
 
-        <div id="user-profile" class="user-profile hidden">
-            <h3>These are <span id="user-name"></span>'s Mazes:</h3>
-            <div id="user-boards" class="secondary-container"></div>
+            <div id="user-profile" class="user-profile hidden">
+                <h3>These are <span id="user-name"></span>'s Mazes:</h3>
+                <div id="user-boards" class="secondary-container"></div>
+            </div>
         </div>
 
         <div class="horizontal-sep"></div>
 
-        <!-- saveBoard -->
+        <!-- save board -->
         <div class="form-grid">
             <input type="text" placeholder="Name of the maze" class="secondary-container mid-box" id="boardNameInput">
             <button type="submit" class="secondary-container mid-box button" onclick="handleSaveBoard(event)">Save
@@ -173,6 +173,7 @@
         </div>
     </aside>
 
+    <!-- canvas -->
     <main class="board-container" id="board-wrapper">
         <canvas id="board-canvas"></canvas>
     </main>

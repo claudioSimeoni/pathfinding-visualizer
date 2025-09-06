@@ -1,15 +1,15 @@
 /* module concluded */
 :root {
-	--bg1: #344A6C;  
-	--bg2: #2B3E5C;  
-	--bg3: #22324B;  
-	--bg4: #19263A; 
+	--bg1: #344A6C;
+	--bg2: #2B3E5C;
+	--bg3: #22324B;
+	--bg4: #19263A;
 
-	--accent-primary: #6C63FF;   
-	--accent-secondary: #00b3a4; 
-	--accent-start: #000000;     
-	--accent-end: #000000;       
+	--accent-primary: #6C63FF;
+	--accent-secondary: #00b3a4;
+	--accent-start: #000000;
+	--accent-end: #000000;
 
-	--text-primary: #F5F7FA;     
-	--text-secondary: #B0BED9;    
+	--text-primary: #F5F7FA;
+	--text-secondary: #B0BED9;
 }
