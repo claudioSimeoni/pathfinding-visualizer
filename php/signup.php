@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
+    /* running secure query */
     $query = $conn->prepare("INSERT INTO users (username, email, password) VALUES(?, ?, ?)");
     $query->bind_param("sss", $username, $email, $hashed_password);
 
@@ -50,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user_id = $conn->insert_id;
         $boards = [];
 
+        /* creating and setting token */ 
         $token = bin2hex(random_bytes(32));
         $_SESSION["user_id"] = $user_id;
         $_SESSION["token"] = $token;

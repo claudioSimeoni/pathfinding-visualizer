@@ -20,7 +20,7 @@
     display: none;
 }
 
-/* styling underlining text */
+/* styling text when underlined with the cursor, code found on the internet*/
 ::selection {
     background: var(--accent-primary);
     color: var(--text-primary);

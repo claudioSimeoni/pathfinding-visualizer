@@ -52,6 +52,11 @@ function drawCanvas() {
 }
 
 function loadNewRepr(repr) {
+    /* if an alg is running return */
+    if(!stop){
+        return;
+    }
+
     setGrid(repr);
     start = null;
     end = null;

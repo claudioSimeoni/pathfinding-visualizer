@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $board_id = $data["board_id"];
     $user_id = $_SESSION["user_id"];
 
+    /* checking if token is set and and equal to the one saved on the server side */
     if (!isset($_SESSION["user_id"]) || !isset($_SESSION["token"])) {
         header("HTTP/1.1 401 Unauthorized");
         exit("You must log in to delete a board.");
@@ -24,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit("Invalid session token");
     }
 
+    /* running secure query */
     $query = $connection->prepare("DELETE FROM boards WHERE board_id = ? AND user_id = ?");
     $query->bind_param("ii", $board_id, $_SESSION["user_id"]);
     $query->execute();

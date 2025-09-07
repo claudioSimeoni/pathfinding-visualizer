@@ -1,4 +1,14 @@
-function initialize() {
+/* this part reloads the page normally (not hard reload) for old versions of browsers that
+didn't load the canvas properly */
+if (!localStorage.getItem("canvas-refreshed")) {
+      localStorage.setItem("canvas-refreshed", "yes");
+      location.reload();
+} else {
+      /* clears the flag for next loading */
+      localStorage.removeItem("canvas-refreshed");
+}
+
+window.onload = function() {
     /* initializing canvas */
     let canvas = document.getElementById("board-canvas");
     let canvas_wrapper = document.getElementById("board-wrapper");
@@ -23,7 +33,3 @@ function initialize() {
 
     initCanvas();
 }
-
-window.addEventListener("load", () => {
-    initialize();
-});

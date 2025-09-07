@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $data["username"];
     $password = $data["password"];
 
+    /* running secure query */
     $query = $conn->prepare("SELECT user_id, email, username, password FROM users WHERE username = ?"); 
     $query->bind_param("s", $username); 
     $query->execute(); 
@@ -24,12 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user = $result->fetch_assoc(); 
 
         if (password_verify($password, $user["password"])) {
+            /* creating and setting token */ 
             $token = bin2hex(random_bytes(32)); 
             $_SESSION["user_id"] = $user["user_id"]; 
             $_SESSION["token"] = $token; 
 
             setcookie("session_token", $token, time() + 3600, "/", "", false, true); 
 
+            /* running secure query to get the boards */
             $boards_query = $conn->prepare("SELECT board_id, name, repr, creation_timestamp FROM boards WHERE user_id = ?");
             $boards_query->bind_param("i", $user["user_id"]);
             $boards_query->execute(); 

@@ -1,13 +1,12 @@
 class ApiContext {
     constructor() { }
 
-    // TODO: add a function handle response ? since the code is duplicated
-
     async signup(username, email, password) {
-        const payload = { username, email, password }; // this is a shortcut for username: username ...
+        const payload = { username, email, password };
 
+        /* fetching data for the signup to the php related module */
         try {
-            const response = await fetch("../php/signup.php", { // relative path from the index.html
+            const response = await fetch("../php/signup.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -46,6 +45,7 @@ class ApiContext {
     async login(username, password) {
         const payload = { username, password };
 
+        /* fetching data for the login to the php related module */
         try {
             const response = await fetch("../php/login.php", {
                 method: "POST",
@@ -85,6 +85,7 @@ class ApiContext {
 
     async saveBoard(boardName, repr) {
         try {
+            /* fetching data to save the board to the php related module */
             const response = await fetch("../php/save.php", {
                 method: "POST",
                 headers: {
@@ -109,6 +110,7 @@ class ApiContext {
 
     async deleteBoard(boardId) {
         try {
+            /* fetching data to delete the board to the php related module */
             const response = await fetch("../php/delete.php", {
                 method: "POST",
                 headers: {

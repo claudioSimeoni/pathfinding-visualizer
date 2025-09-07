@@ -1,3 +1,5 @@
+/* the code for this section was taken from https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/ */ 
+
 input[type="range"] {
     -webkit-appearance: none;
     width: 100%;

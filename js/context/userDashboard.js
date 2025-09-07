@@ -2,7 +2,7 @@ class UserDashboard {
     constructor() { };
 
     static htmlCard(name, board_id, repr, timestamp) {
-        /* Basic HTML escape */
+        /* HTML escape */
         const escapeHTML = (str) =>
             String(str)
                 .replace(/&/g, "&amp;")
@@ -11,7 +11,7 @@ class UserDashboard {
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
 
-        /* Escape for JavaScript strings inside HTML attributes */
+        /* escape for JavaScript strings inside HTML attributes */
         const escapeJS = (str) =>
             String(str)
                 .replace(/\\/g, "\\\\")
@@ -27,6 +27,7 @@ class UserDashboard {
         let safeRepr = escapeJS(repr);
         let safeTimestamp = escapeHTML(timestamp);
 
+        /* board card that will be embedded in user-profile */
         return `
             <div id="card-board-${safeBoardId}">
                 <div class="card">
@@ -69,6 +70,7 @@ class UserDashboard {
         const boardsList = document.getElementById("user-boards");
         boardsList.innerHTML = "";
 
+        /* adding all the boards to the user-profile */
         boards.map((board) => {
             this.addBoard(board);
         });

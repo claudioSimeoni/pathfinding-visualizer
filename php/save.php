@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $board_name = $data["name"];
     $user_id = $_SESSION["user_id"];
 
+    /* checking if token is set and and equal to the one saved on the server side */
     if (!isset($_SESSION["user_id"]) || !isset($_SESSION["token"])) {
         header("HTTP/1.1 401 Unauthorized");
         exit("You must log in to save a board.");
@@ -25,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit("Invalid session token");
     }
 
+    /* running secure query */
     $query = $conn->prepare("INSERT INTO boards (repr, name, user_id) VALUES (?, ?, ?)");
     $query->bind_param("ssi", $board, $board_name, $user_id); 
     $query->execute(); 
@@ -32,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($query->affected_rows) {
         $board_id = $query->insert_id;
 
+        /* running query to get the timestamp of the saved board */
         $timestamp_query = $conn->prepare(
             "SELECT creation_timestamp FROM boards WHERE board_id = ?"
         );
