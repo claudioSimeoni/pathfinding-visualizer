@@ -110,10 +110,10 @@
         <!-- login / signup -->
         <div class="user-dashboard" id="user-dashboard">
             <div id="signup-form" class="registration-form">
-                <div style="font-weight: bold">Register</div> <!-- TODO: make this a b??-->
+                <div style="font-weight: bold">Register</div>
                 <div class="horizontal-sep"></div>
 
-                <form onsubmit="authContext.handleSignup(event)" class="form-grid">
+                <form onsubmit="authContext.handleSignup(event)" class="form-grid" novalidate>
                     <label for="signup-username">Username</label>
                     <input class="secondary-container mid-box" type="text" id="signup-username" name="username"
                         pattern="^[A-Za-z0-9!#$%&*^_-~]{3,30}$" required>

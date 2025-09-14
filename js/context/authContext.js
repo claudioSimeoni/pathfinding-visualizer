@@ -6,7 +6,9 @@ class AuthContext {
     }
 
     async handleSignup(event) {
+        console.log("bruma");
         event.preventDefault();
+
 
         const usernameInput = document.getElementById("signup-username");
         const emailInput = document.getElementById("signup-email");
@@ -25,11 +27,14 @@ class AuthContext {
         }
 
         if (!passwordInput.checkValidity()) {
+            console.log("bruma");
             alert(
                 "The password must be at least 6 characters long and at most 30 characters long.\nAllowed symbols: ! # $ % & * ^ _ - ~",
             );
             return;
         }
+
+        console.log("bruma");
 
         const username = usernameInput.value;
         const email = emailInput.value;

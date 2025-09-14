@@ -70,14 +70,18 @@ async function aStar(y, x) {
                 }
             }
         }
+
         let [curry, currx] = [minCouple[0], minCouple[1]];
+
+        if(curry === -1 && currx === -1) return;
 
         if (curry == end[0] && currx == end[1]) {
             stop = 1;
             await retrievePath();
+            return;
         }
 
-        if (stop) break;
+        if (stop) return;
 
         visited[curry][currx] = 1;
         drawCanvas();
@@ -181,7 +185,6 @@ async function runAlgorithm() {
         stop = 1;
         alert("No path exists between start and end!");
     }
-
 
     if (pathLength > 0) {
         handleLog();
