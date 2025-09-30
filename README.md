@@ -1,4 +1,22 @@
-This site is a simple version of a pathfinding visualizer, it implements 3 algorithms, DFS, BFS and A*. Here you have the official version of the guide you can also consult on the page and some interesting implementation details.
+This is a simple version of a pathfinding visualizer, it implements 3 algorithms, DFS, BFS and A*. Here you have the official version of the guide you can also consult on the page and some interesting implementation details.
+
+## USAGE
+
+1. Run a local PHP + MySQL environment (e.g. XAMPP/LAMP/MAMP).
+2. Create a MySQL database named **`pweb_db`**.
+3. Import the SQL file.
+4. Update `php/dbaccess.php` with your DB credentials if needed.
+5. Start Apache & MySQL, then open: http://localhost/your-project-folder/
+
+---
+
+## DEMO
+
+![Demo](utilities/demo.gif)
+
+#### LOGIN and SAVING BOARDS
+
+![Login-demo](utilities/login-demo.gif)
 
 ---
 
@@ -25,7 +43,7 @@ You can sign up and save your favorite mazes on your profile and then load it wh
 --- 
 
 ## Some implementation details
-My initial idea for the random maze generator was to generate a randomic path before generating the maze, the problem was that the randomic path often covered almost the entire board. So i decided to generate mazes and immediately check if a path existed beween start and end. Doing a montecarlo simulation i found out that this method, with the parameters i set requires 2 generations of the maze on average.
+My initial idea for the random maze generator was to generate a random path before generating the maze, the problem was that the random path often covered almost the entire board. So i decided to generate mazes and immediately check if a path existed between start and end. Doing a Montecarlo simulation i found out that this method, with the parameters i set requires 2 generations of the maze on average.
 
 #### Algorithms implemented
 - DFS: the most common graph searching algorithm, it simply visits the current node and runs recursively in all the other directions, in this case the order of the directions is fixed, one could also implement it randomizing the directions. Time complexity: O(n). Space complexity: O(n).
